@@ -1,0 +1,529 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: ClassBridge learning companion API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: learning
+    description: Courses, quizzes, tutoring, and student progress
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /dashboard:
+    get:
+      operationId: getDashboard
+      tags: [learning]
+      summary: Get the active student's learning dashboard
+      responses:
+        "200":
+          description: Dashboard summary and course topics
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dashboard"
+  /documents:
+    get:
+      operationId: listDocuments
+      tags: [learning]
+      summary: List course materials
+      responses:
+        "200":
+          description: Course materials
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Document"
+  /documents/upload:
+    post:
+      operationId: uploadDocument
+      tags: [learning]
+      summary: Upload and extract a PDF course material
+      parameters:
+        - name: filename
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: subject
+          in: query
+          required: false
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/pdf:
+            schema:
+              type: string
+              format: binary
+      responses:
+        "201":
+          description: PDF extracted and saved as course material
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Document"
+        "400":
+          description: Invalid or unreadable PDF
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /documents/{documentId}/process:
+    post:
+      operationId: processDocument
+      tags: [learning]
+      summary: Extract concepts and prepare course content for retrieval
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Detected topic map
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Topic"
+  /documents/{documentId}/topics:
+    get:
+      operationId: getDocumentTopics
+      tags: [learning]
+      summary: Get the topic map for a course
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Topics
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Topic"
+  /demo/start:
+    post:
+      operationId: startDemo
+      tags: [learning]
+      summary: Load the sample DBMS course without resetting existing progress
+      responses:
+        "200":
+          description: Demo dashboard
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dashboard"
+  /progress/reset:
+    post:
+      operationId: resetProgress
+      tags: [learning]
+      summary: Clear learning progress while preserving course materials
+      responses:
+        "200":
+          description: Progress reset
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProgressResetResult"
+  /diagnostic/start:
+    post:
+      operationId: startDiagnostic
+      tags: [learning]
+      summary: Create a five-question baseline diagnostic
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuizStartInput"
+      responses:
+        "200":
+          description: Diagnostic quiz
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Quiz"
+  /diagnostic/submit:
+    post:
+      operationId: submitDiagnostic
+      tags: [learning]
+      summary: Score a diagnostic and store baseline mastery
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuizSubmissionInput"
+      responses:
+        "200":
+          description: Diagnostic results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuizResult"
+  /teacher/ask:
+    post:
+      operationId: askTeacher
+      tags: [learning]
+      summary: Answer a question using retrieved course text when possible
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TeacherQuestionInput"
+      responses:
+        "200":
+          description: Tutor explanation and grounding metadata
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeacherAnswer"
+  /practice/generate:
+    post:
+      operationId: generatePractice
+      tags: [learning]
+      summary: Generate a five-question topic practice set
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PracticeRequest"
+      responses:
+        "200":
+          description: Practice quiz
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Quiz"
+  /practice/submit:
+    post:
+      operationId: submitPractice
+      tags: [learning]
+      summary: Score practice and update topic mastery
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuizSubmissionInput"
+      responses:
+        "200":
+          description: Practice results and mastery improvement
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PracticeResult"
+  /mastery:
+    get:
+      operationId: getMastery
+      tags: [learning]
+      summary: Get topic-level mastery and current recommendation
+      parameters:
+        - name: documentId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Mastery overview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MasteryOverview"
+  /recommendations:
+    get:
+      operationId: getRecommendations
+      tags: [learning]
+      summary: Get the next personalized revision action
+      parameters:
+        - name: documentId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Recommended next action
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Recommendation"
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+    ProgressResetResult:
+      type: object
+      properties:
+        reset: { type: boolean }
+      required: [reset]
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+      required: [error]
+    Topic:
+      type: object
+      properties:
+        id: { type: string }
+        documentId: { type: string }
+        name: { type: string }
+        description: { type: string }
+        mastery: { type: number }
+        status:
+          type: string
+          enum: [Strong, Improving, Needs Attention]
+        order: { type: integer }
+      required: [id, documentId, name, description, mastery, status, order]
+    Document:
+      type: object
+      properties:
+        id: { type: string }
+        filename: { type: string }
+        subject: { type: string }
+        status:
+          type: string
+          enum: [uploaded, processed]
+        createdAt: { type: string }
+        pageCount: { type: integer }
+        textLength: { type: integer }
+      required: [id, filename, subject, status, createdAt, pageCount, textLength]
+    Activity:
+      type: object
+      properties:
+        id: { type: string }
+        title: { type: string }
+        detail: { type: string }
+        createdAt: { type: string }
+        kind: { type: string }
+      required: [id, title, detail, createdAt, kind]
+    Dashboard:
+      type: object
+      properties:
+        documentId: { type: string }
+        courseName: { type: string }
+        overallMastery: { type: number }
+        streak: { type: integer }
+        completedTopics: { type: integer }
+        weakestTopic: { type: string }
+        weakestMastery: { type: number }
+        strongestTopic: { type: string }
+        recommendation: { type: string }
+        demoMode: { type: boolean }
+        topics:
+          type: array
+          items: { $ref: "#/components/schemas/Topic" }
+        activity:
+          type: array
+          items: { $ref: "#/components/schemas/Activity" }
+      required:
+        - documentId
+        - courseName
+        - overallMastery
+        - streak
+        - completedTopics
+        - weakestTopic
+        - weakestMastery
+        - strongestTopic
+        - recommendation
+        - demoMode
+        - topics
+        - activity
+    Question:
+      type: object
+      properties:
+        id: { type: string }
+        topicId: { type: string }
+        topicName: { type: string }
+        question: { type: string }
+        options:
+          type: array
+          items: { type: string }
+        difficulty:
+          type: string
+          enum: [Easy, Medium, Hard]
+      required: [id, topicId, topicName, question, options, difficulty]
+    QuestionReview:
+      type: object
+      properties:
+        question: { type: string }
+        options:
+          type: array
+          items: { type: string }
+        selectedAnswer: { type: integer, minimum: 0, maximum: 3 }
+        correctAnswer: { type: integer, minimum: 0, maximum: 3 }
+        explanation: { type: string }
+        isCorrect: { type: boolean }
+      required: [question, options, selectedAnswer, correctAnswer, explanation, isCorrect]
+    Quiz:
+      type: object
+      properties:
+        attemptId: { type: string }
+        title: { type: string }
+        kind:
+          type: string
+          enum: [diagnostic, practice]
+        questions:
+          type: array
+          items: { $ref: "#/components/schemas/Question" }
+      required: [attemptId, title, kind, questions]
+    QuizStartInput:
+      type: object
+      properties:
+        documentId: { type: string }
+      required: [documentId]
+    AnswerInput:
+      type: object
+      properties:
+        questionId: { type: string }
+        answerIndex: { type: integer, minimum: 0, maximum: 3 }
+      required: [questionId, answerIndex]
+    QuizSubmissionInput:
+      type: object
+      properties:
+        attemptId: { type: string }
+        answers:
+          type: array
+          minItems: 1
+          items: { $ref: "#/components/schemas/AnswerInput" }
+      required: [attemptId, answers]
+    TopicScore:
+      type: object
+      properties:
+        topicId: { type: string }
+        topicName: { type: string }
+        score: { type: number }
+        correct: { type: integer }
+        total: { type: integer }
+      required: [topicId, topicName, score, correct, total]
+    QuizResult:
+      type: object
+      properties:
+        attemptId: { type: string }
+        score: { type: number }
+        correct: { type: integer }
+        total: { type: integer }
+        weakestTopic: { type: string }
+        topicScores:
+          type: array
+          items: { $ref: "#/components/schemas/TopicScore" }
+        recommendation: { type: string }
+        questionReviews:
+          type: array
+          items: { $ref: "#/components/schemas/QuestionReview" }
+      required: [attemptId, score, correct, total, weakestTopic, topicScores, recommendation, questionReviews]
+    TeacherQuestionInput:
+      type: object
+      properties:
+        documentId: { type: string }
+        topicId: { type: string }
+        question: { type: string, minLength: 1, maxLength: 2000 }
+        mode:
+          type: string
+          enum: [simple, detailed, exam]
+      required: [documentId, topicId, question, mode]
+    TeacherAnswer:
+      type: object
+      properties:
+        answer: { type: string }
+        grounded: { type: boolean }
+        sourceExcerpt:
+          type: ["string", "null"]
+        demoMode: { type: boolean }
+      required: [answer, grounded, sourceExcerpt, demoMode]
+    PracticeRequest:
+      type: object
+      properties:
+        documentId: { type: string }
+        topicId: { type: string }
+        difficulty:
+          type: string
+          enum: [Easy, Medium, Hard]
+      required: [documentId, topicId, difficulty]
+    PracticeResult:
+      type: object
+      properties:
+        attemptId: { type: string }
+        topicId: { type: string }
+        topicName: { type: string }
+        score: { type: number }
+        correct: { type: integer }
+        total: { type: integer }
+        previousMastery: { type: number }
+        newMastery: { type: number }
+        improvement: { type: number }
+        recommendation: { type: string }
+        questionReviews:
+          type: array
+          items: { $ref: "#/components/schemas/QuestionReview" }
+      required:
+        - attemptId
+        - topicId
+        - topicName
+        - score
+        - correct
+        - total
+        - previousMastery
+        - newMastery
+        - improvement
+        - recommendation
+        - questionReviews
+    MasteryOverview:
+      type: object
+      properties:
+        documentId: { type: string }
+        overallMastery: { type: number }
+        topics:
+          type: array
+          items: { $ref: "#/components/schemas/Topic" }
+        recommendation:
+          $ref: "#/components/schemas/Recommendation"
+      required: [documentId, overallMastery, topics, recommendation]
+    Recommendation:
+      type: object
+      properties:
+        topicId: { type: string }
+        topicName: { type: string }
+        mastery: { type: number }
+        title: { type: string }
+        detail: { type: string }
+        action:
+          type: string
+          enum: [learn, practice, advance]
+      required: [topicId, topicName, mastery, title, detail, action]

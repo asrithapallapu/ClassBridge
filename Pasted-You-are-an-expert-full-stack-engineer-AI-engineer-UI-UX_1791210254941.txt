@@ -1,0 +1,1782 @@
+You are an expert full-stack engineer, AI engineer, UI/UX designer, and debugging engineer.
+
+Build a complete, polished, working web application called:
+
+CLASSBRIDGE
+“Your Personal AI Learning Companion”
+
+IMPORTANT:
+This is a ONE-SHOT BUILD REQUEST.
+Do not create only a prototype, mockup, landing page, or incomplete skeleton.
+Build the complete working MVP described below in one project.
+
+The application must be functional end-to-end, visually polished, responsive, and suitable for a student hackathon demonstration.
+
+==================================================
+1. PRODUCT VISION
+==================================================
+
+ClassBridge is an AI-powered personal learning companion.
+
+The goal is NOT simply:
+
+“Upload a PDF and chat with AI.”
+
+That already exists in tools such as ChatGPT and other AI assistants.
+
+ClassBridge's differentiation is the complete learning loop:
+
+DIAGNOSE → TEACH → PRACTICE → MEASURE → ADAPT → RETEST
+
+The application should take a student's course material and turn it into a personalized learning system.
+
+A student should be able to:
+
+1. Upload course material.
+2. Extract and process the material.
+3. Identify important topics/concepts.
+4. Take a short diagnostic test.
+5. Establish baseline knowledge.
+6. Learn concepts using an AI teacher grounded in the uploaded material.
+7. Ask doubts.
+8. Practice with AI-generated questions.
+9. Track performance at concept/topic level.
+10. Detect weak concepts.
+11. Receive personalized revision recommendations.
+12. Retest weak concepts.
+13. See improvement from baseline to current mastery.
+
+Example:
+
+Before:
+Functional Dependencies — 40%
+
+After targeted learning:
+Functional Dependencies — 82%
+
+The application should make this improvement visually obvious.
+
+==================================================
+2. TARGET USER
+==================================================
+
+Primary user:
+
+College students preparing for subjects, exams, assignments, and technical courses.
+
+Example subjects:
+
+DBMS
+Operating Systems
+Computer Networks
+Data Structures
+Python
+Java
+Software Engineering
+Mathematics
+Any subject supported by uploaded course material.
+
+==================================================
+3. CORE MVP FEATURES
+==================================================
+
+MUST IMPLEMENT:
+
+A. PDF/course material upload
+
+B. PDF text extraction
+
+C. Course material processing
+
+D. Topic/concept extraction
+
+E. Material-grounded AI responses
+
+F. RAG-based question answering
+
+G. AI teacher
+
+H. Multiple explanation modes:
+   - Explain Simply
+   - Detailed Explanation
+   - Exam Focus
+
+I. Diagnostic test
+
+J. AI-generated practice questions
+
+K. Quiz system
+
+L. Quiz scoring
+
+M. Concept/topic-level performance tracking
+
+N. Weak-topic detection
+
+O. Personalized revision recommendations
+
+P. Retesting
+
+Q. Before-vs-after mastery comparison
+
+R. Student progress dashboard
+
+S. Dark mode
+
+T. Light mode
+
+U. Responsive design
+
+V. Demo/fallback data so the application remains usable even if an external AI API is unavailable.
+
+==================================================
+4. IMPORTANT PRODUCT RULE
+==================================================
+
+Do NOT build a generic chatbot.
+
+The AI teacher must always be presented as part of the learning system.
+
+The application should guide the student toward mastery rather than merely answering questions.
+
+The main dashboard should emphasize:
+
+- What do I know?
+- What am I weak at?
+- What should I study next?
+- Did I improve?
+
+==================================================
+5. COMPLETE USER JOURNEY
+==================================================
+
+The main flow should be:
+
+LANDING / WELCOME
+        ↓
+UPLOAD COURSE MATERIAL
+        ↓
+PROCESS MATERIAL
+        ↓
+GENERATE TOPIC MAP
+        ↓
+DIAGNOSTIC TEST
+        ↓
+BASELINE MASTERY
+        ↓
+AI TEACHER
+        ↓
+PRACTICE
+        ↓
+RESULTS
+        ↓
+WEAK TOPIC DETECTION
+        ↓
+PERSONALIZED REVISION
+        ↓
+RETEST
+        ↓
+UPDATED MASTERY
+        ↓
+PROGRESS DASHBOARD
+
+==================================================
+6. PAGE 1 — LANDING / WELCOME
+==================================================
+
+Create a premium educational landing page.
+
+Brand:
+CLASSBRIDGE
+
+Tagline:
+“Learn what you need. Practice what you don't know. Master your course.”
+
+Supporting text:
+
+“Turn your course material into a personalized learning journey powered by AI.”
+
+Buttons:
+
+“Start Learning”
+
+“Try Demo”
+
+Show a short visual representation of:
+
+Course Material → AI Teacher → Practice → Mastery
+
+Design should feel modern, intelligent, academic, and premium.
+
+Do NOT make it look like a generic AI chatbot website.
+
+==================================================
+7. PAGE 2 — DASHBOARD
+==================================================
+
+Create a student dashboard.
+
+Show:
+
+Welcome message.
+
+Current course.
+
+Overall mastery percentage.
+
+Learning streak.
+
+Topics completed.
+
+Weakest topic.
+
+Recommended next action.
+
+Example:
+
+Overall Mastery
+72%
+
+Strongest Topic
+Normalization
+
+Needs Attention
+Functional Dependencies — 40%
+
+Recommended:
+“Review Functional Dependencies and take a 5-question practice test.”
+
+Include:
+
+Continue Learning button.
+
+Practice Weak Topic button.
+
+View Mastery button.
+
+Recent activity.
+
+Topic cards.
+
+Each topic should display:
+
+Topic name
+Mastery %
+Status:
+Strong / Improving / Needs Attention
+
+Use clean progress bars.
+
+==================================================
+8. PAGE 3 — UPLOAD MATERIAL
+==================================================
+
+Create an attractive upload interface.
+
+Heading:
+
+“Bring Your Course Material”
+
+Description:
+
+“Upload your PDF and ClassBridge will transform it into a personalized learning path.”
+
+Allow PDF upload.
+
+Show:
+
+Drag & drop area
+
+Browse files button
+
+File name
+
+File size
+
+Upload progress
+
+Processing state
+
+Success state
+
+Error state
+
+After upload:
+
+Extract text.
+
+Process content.
+
+Identify important topics.
+
+Create chunks.
+
+Prepare content for semantic search.
+
+Display:
+
+“Material processed successfully.”
+
+Then show detected topics.
+
+Example:
+
+DBMS
+├── Database Fundamentals
+├── ER Model
+├── Relational Model
+├── Functional Dependencies
+├── Normalization
+└── Transactions
+
+Button:
+
+“Start Diagnostic Test”
+
+==================================================
+9. PAGE 4 — DIAGNOSTIC TEST
+==================================================
+
+Create a 5-question diagnostic test.
+
+Purpose:
+
+Establish the student's baseline knowledge.
+
+Each question should be associated with a topic/concept.
+
+Support:
+
+Multiple choice questions.
+
+Question number.
+
+Progress indicator.
+
+Answer selection.
+
+Next button.
+
+Previous button.
+
+Submit button.
+
+Do not make the interface cluttered.
+
+After submission:
+
+Calculate:
+
+Overall baseline score.
+
+Topic-level performance.
+
+Weak concepts.
+
+Strong concepts.
+
+Store the results.
+
+Example:
+
+Diagnostic Complete!
+
+Your baseline mastery:
+
+Database Fundamentals — 80%
+ER Model — 70%
+Functional Dependencies — 40%
+Normalization — 55%
+Transactions — 75%
+
+Weakest area:
+Functional Dependencies
+
+Button:
+
+“Start Personalized Learning”
+
+==================================================
+10. PAGE 5 — AI TEACHER
+==================================================
+
+This is one of the most important screens.
+
+Call it:
+
+“AI Teacher”
+
+The AI teacher should feel like a personalized tutor.
+
+Layout:
+
+LEFT SIDE:
+Topic list.
+
+RIGHT SIDE:
+Learning area.
+
+Display:
+
+Current topic.
+
+Explanation.
+
+Examples.
+
+Key points.
+
+Exam tips.
+
+A question box:
+
+“Ask your AI Teacher anything about this topic…”
+
+Buttons:
+
+Explain Simply
+
+Detailed Explanation
+
+Exam Focus
+
+Ask Question
+
+The AI response MUST be grounded in the uploaded course material whenever relevant.
+
+Use RAG.
+
+The interface should clearly show a small label:
+
+“Based on your course material”
+
+when the response uses retrieved material.
+
+Do not falsely claim that every response came from the document.
+
+==================================================
+11. AI TEACHER BEHAVIOR
+==================================================
+
+The AI should behave like a patient college teacher.
+
+For:
+
+“Explain Functional Dependency”
+
+Return a structured explanation:
+
+Definition
+
+Simple explanation
+
+Example
+
+Important points
+
+Common mistake
+
+Exam tip
+
+For:
+
+“Explain this simply”
+
+Use beginner-friendly language.
+
+For:
+
+“Detailed Explanation”
+
+Provide deeper technical explanation.
+
+For:
+
+“Exam Focus”
+
+Prioritize:
+
+Definitions
+Important concepts
+Likely exam points
+Comparisons
+Examples
+Common mistakes
+
+Never intentionally invent information from the student's uploaded material.
+
+If the answer cannot be found in the uploaded material, clearly say:
+
+“I couldn't find this specific information in your course material, but I can explain the general concept.”
+
+==================================================
+12. PAGE 6 — PRACTICE
+==================================================
+
+Create a practice screen.
+
+Generate 5 questions based on:
+
+Current topic.
+
+Weak areas.
+
+Previous mistakes.
+
+Question difficulty.
+
+Support:
+
+Easy
+Medium
+Hard
+
+Question types:
+
+MCQ initially.
+
+Each question should have:
+
+Question
+
+Options
+
+Submit answer
+
+Correct/incorrect feedback
+
+Explanation
+
+Related topic
+
+After 5 questions:
+
+Calculate score.
+
+Update mastery.
+
+==================================================
+13. PAGE 7 — RESULTS
+==================================================
+
+Create a visually impressive results screen.
+
+Show:
+
+Practice Score
+
+Previous Mastery
+
+New Mastery
+
+Improvement
+
+Example:
+
+Functional Dependencies
+
+Before
+40%
+
+After
+82%
+
+Improvement
++42%
+
+Use a clear before-vs-after visualization.
+
+Show:
+
+What you improved.
+
+What you still need to review.
+
+Recommended next step.
+
+Buttons:
+
+Review Mistakes
+
+Practice Again
+
+Continue Learning
+
+View Mastery
+
+==================================================
+14. PAGE 8 — MASTERY DASHBOARD
+==================================================
+
+Create a concept-level mastery dashboard.
+
+Show all topics.
+
+Example:
+
+Database Fundamentals       88%
+ER Model                    76%
+Relational Model            81%
+Functional Dependencies     82%
+Normalization               64%
+Transactions                91%
+
+Use visual progress bars.
+
+Status:
+
+Strong
+≥ 80%
+
+Improving
+60–79%
+
+Needs Attention
+< 60%
+
+Highlight weak concepts.
+
+Show personalized recommendations.
+
+Example:
+
+“Normalization is currently your weakest topic.”
+
+“Recommended action:
+Review 3NF and BCNF, then complete a 5-question practice test.”
+
+==================================================
+15. REVISION ENGINE
+==================================================
+
+Implement a simple but meaningful recommendation engine.
+
+Use performance data.
+
+If mastery < 60:
+Recommend targeted revision.
+
+If mastery 60–79:
+Recommend practice.
+
+If mastery ≥ 80:
+Recommend moving to the next concept or advanced questions.
+
+Recommendations should consider:
+
+Current score
+Previous score
+Number of attempts
+Recent mistakes
+
+Example:
+
+40% → Needs urgent revision
+
+60% → Practice more
+
+82% → Strong
+
+==================================================
+16. DATABASE
+==================================================
+
+Use SQLite.
+
+Keep the database simple and reliable.
+
+Create these core tables:
+
+users
+
+documents
+
+topics
+
+questions
+
+attempts
+
+performance
+
+chat_sessions
+
+messages
+
+Suggested structure:
+
+users:
+id
+name
+email
+created_at
+
+documents:
+id
+user_id
+filename
+subject
+file_path
+status
+created_at
+
+topics:
+id
+document_id
+name
+description
+created_at
+
+questions:
+id
+topic_id
+question_text
+option_a
+option_b
+option_c
+option_d
+correct_answer
+difficulty
+explanation
+
+attempts:
+id
+user_id
+question_id
+selected_answer
+is_correct
+score
+created_at
+
+performance:
+id
+user_id
+topic_id
+mastery_score
+previous_score
+attempt_count
+updated_at
+
+chat_sessions:
+id
+user_id
+topic_id
+created_at
+
+messages:
+id
+session_id
+role
+content
+created_at
+
+Use foreign keys correctly.
+
+Do not over-engineer the database.
+
+==================================================
+17. RAG ARCHITECTURE
+==================================================
+
+Implement a real RAG architecture where possible.
+
+Pipeline:
+
+PDF
+ ↓
+Text extraction
+ ↓
+Cleaning
+ ↓
+Chunking
+ ↓
+Embeddings
+ ↓
+Vector storage/search
+ ↓
+Retrieve relevant chunks
+ ↓
+Send context to LLM
+ ↓
+Generate grounded answer
+
+Use PyMuPDF for PDF extraction.
+
+For vector search, use a lightweight local solution that works reliably in Replit.
+
+Prefer a simple implementation such as:
+
+FAISS
+
+or another lightweight vector index.
+
+If FAISS creates environment/deployment problems, implement a reliable fallback using embeddings plus cosine similarity with NumPy.
+
+Do NOT make the entire application dependent on an unnecessarily complicated vector database.
+
+==================================================
+18. AI PROVIDER
+==================================================
+
+Structure the AI service so the provider can be configured through environment variables.
+
+Use an API-based LLM.
+
+Create:
+
+backend/app/services/ai.py
+
+The AI provider key must NEVER be hardcoded.
+
+Use:
+
+OPENAI_API_KEY
+
+or the provider available in the Replit environment.
+
+Create a clean abstraction so the provider can be changed later.
+
+IMPORTANT:
+
+If no API key is available:
+
+DO NOT crash.
+
+Switch to DEMO MODE.
+
+Demo mode must allow the entire UI and learning flow to function using realistic predefined/generated sample responses and questions.
+
+Display a subtle indicator:
+
+“Demo Mode”
+
+when applicable.
+
+==================================================
+19. AI PROMPTING
+==================================================
+
+Create separate prompts for:
+
+1. Topic extraction
+
+2. Diagnostic question generation
+
+3. AI teaching
+
+4. Practice question generation
+
+5. Quiz evaluation
+
+6. Revision recommendations
+
+The teaching prompt should include:
+
+Student question
+Current topic
+Relevant retrieved course material
+Student performance
+Desired explanation mode
+
+The AI should prioritize the provided course material.
+
+==================================================
+20. BACKEND
+==================================================
+
+Use:
+
+Python
+
+FastAPI
+
+SQLite
+
+PyMuPDF
+
+Embeddings/vector search
+
+LLM API
+
+Create clean API routes.
+
+Suggested routes:
+
+POST /api/documents/upload
+
+GET /api/documents
+
+GET /api/documents/{id}
+
+POST /api/documents/{id}/process
+
+GET /api/topics/{document_id}
+
+POST /api/diagnostic/start
+
+POST /api/diagnostic/submit
+
+POST /api/chat
+
+POST /api/practice/generate
+
+POST /api/practice/submit
+
+GET /api/performance
+
+GET /api/dashboard
+
+GET /api/recommendations
+
+Create proper Pydantic models.
+
+Validate request data.
+
+Return meaningful HTTP errors.
+
+Do not expose internal stack traces to the frontend.
+
+==================================================
+21. FRONTEND
+==================================================
+
+Use:
+
+React
+
+Vite
+
+Tailwind CSS
+
+React Router
+
+Use reusable components.
+
+Suggested structure:
+
+frontend/
+  src/
+    components/
+      Navbar.jsx
+      ProgressCard.jsx
+      TopicCard.jsx
+      ChatBox.jsx
+      QuizQuestion.jsx
+      LoadingState.jsx
+      ErrorMessage.jsx
+      ThemeToggle.jsx
+    pages/
+      Landing.jsx
+      Dashboard.jsx
+      Upload.jsx
+      Diagnostic.jsx
+      AITeacher.jsx
+      Practice.jsx
+      Results.jsx
+      Mastery.jsx
+    services/
+      api.js
+    App.jsx
+    main.jsx
+
+Use clean component architecture.
+
+==================================================
+22. VISUAL DESIGN
+==================================================
+
+THIS IS VERY IMPORTANT.
+
+The visual identity must be:
+
+Dark Purple
+Kite Purple
+Deep Violet
+Soft Lavender
+White/Cream accents
+
+Use a premium purple educational aesthetic.
+
+Do NOT make everything neon.
+
+Do NOT make it look childish.
+
+Do NOT make it look like a generic SaaS dashboard.
+
+The visual style should feel:
+
+Elegant
+Academic
+Modern
+Intelligent
+Calm
+Premium
+Slightly magical
+
+==================================================
+23. BUTTERFLY ANIMATION
+==================================================
+
+This is a signature visual element.
+
+Create animated butterfly elements that fly naturally across the interface.
+
+Butterflies should:
+
+- Move from left to right.
+- Move from right to left.
+- Use slightly different paths.
+- Have subtle vertical floating motion.
+- Have gentle wing-flapping animation.
+- Have different sizes.
+- Have different speeds.
+- Appear occasionally rather than covering the whole screen.
+- Be subtle enough that they do not interfere with usability.
+
+Color:
+
+Dark purple / violet.
+
+Use CSS/SVG where possible rather than requiring external image assets.
+
+Butterflies can appear:
+
+On landing page.
+
+Around dashboard background.
+
+During learning transitions.
+
+On successful mastery improvement.
+
+Do NOT make them distracting.
+
+They should feel like a sophisticated visual signature of ClassBridge.
+
+==================================================
+24. BACKGROUND
+==================================================
+
+Use a dark purple/kite-purple gradient background in dark mode.
+
+Suggested visual concept:
+
+deep violet base
++
+soft purple gradients
++
+very subtle glowing blobs
++
+subtle glassmorphism cards
++
+floating butterflies
+
+Avoid excessive blur.
+
+Avoid visual clutter.
+
+Cards should have sufficient contrast.
+
+==================================================
+25. DARK MODE
+==================================================
+
+Dark mode must be the default.
+
+Use:
+
+Deep purple background
+Dark violet cards
+Soft lavender text
+White primary text
+Purple accents
+
+Provide a visible theme toggle.
+
+==================================================
+26. LIGHT MODE
+==================================================
+
+Implement a complete light mode.
+
+Do not simply invert colors.
+
+Light mode should use:
+
+Soft lavender / off-white background
+White cards
+Dark purple text
+Purple accents
+Subtle shadows
+
+The butterfly animation should remain visible but elegant.
+
+The theme preference should persist using localStorage.
+
+==================================================
+27. NAVIGATION
+==================================================
+
+Navbar:
+
+ClassBridge logo/name
+
+Dashboard
+
+Learn
+
+Practice
+
+Mastery
+
+Theme toggle
+
+Profile/demo user
+
+Use React Router.
+
+Navigation must work.
+
+No dead buttons.
+
+==================================================
+28. RESPONSIVENESS
+==================================================
+
+The application must work on:
+
+Desktop
+Laptop
+Tablet
+Mobile
+
+Use responsive Tailwind classes.
+
+On mobile:
+
+Sidebar should collapse.
+
+Cards should stack.
+
+Quiz should remain usable.
+
+AI Teacher should become single-column.
+
+==================================================
+29. DEMO MODE
+==================================================
+
+VERY IMPORTANT FOR HACKATHON.
+
+Create a complete demo experience.
+
+If the user clicks:
+
+“Try Demo”
+
+load sample course data.
+
+Use a sample subject:
+
+Database Management Systems
+
+Sample topics:
+
+Database Fundamentals
+ER Model
+Relational Model
+Functional Dependencies
+Normalization
+Transactions
+
+Create realistic sample diagnostic results.
+
+Example:
+
+Database Fundamentals — 82%
+ER Model — 74%
+Relational Model — 79%
+Functional Dependencies — 42%
+Normalization — 58%
+Transactions — 86%
+
+The dashboard should immediately show:
+
+Overall Mastery
+70%
+
+Weakest Topic
+Functional Dependencies
+
+Recommended:
+“Learn Functional Dependencies”
+
+The demo should allow:
+
+Dashboard
+AI Teacher
+Practice
+Results
+Mastery
+
+to work without uploading a real PDF.
+
+==================================================
+30. ERROR HANDLING
+==================================================
+
+Do NOT allow the application to crash because of:
+
+Missing API key
+Invalid PDF
+Empty PDF
+Network failure
+Backend unavailable
+Invalid user input
+AI timeout
+Malformed AI response
+Database error
+
+Create friendly error states.
+
+Examples:
+
+“Something went wrong while processing your document. Please try again.”
+
+“The AI service is currently unavailable. Demo Mode is still available.”
+
+“Please upload a valid PDF.”
+
+Do not show raw Python stack traces to users.
+
+==================================================
+31. LOADING STATES
+==================================================
+
+Every asynchronous operation needs a proper loading state.
+
+Examples:
+
+Uploading…
+
+Processing course material…
+
+Finding important concepts…
+
+Preparing your diagnostic test…
+
+AI Teacher is thinking…
+
+Generating practice questions…
+
+Updating your mastery…
+
+Use tasteful animations.
+
+==================================================
+32. EMPTY STATES
+==================================================
+
+Create useful empty states.
+
+Examples:
+
+No course uploaded yet.
+
+No practice attempts yet.
+
+No mastery data yet.
+
+No chat history yet.
+
+Always give the user a next action.
+
+==================================================
+33. SECURITY
+==================================================
+
+Do not hardcode API keys.
+
+Use environment variables.
+
+Do not expose secrets in frontend code.
+
+Validate uploaded files.
+
+Allow PDF only.
+
+Limit reasonable upload size.
+
+Sanitize filenames.
+
+Do not execute uploaded files.
+
+==================================================
+34. PROJECT STRUCTURE
+==================================================
+
+Create a clean project structure similar to:
+
+ClassBridge/
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   ├── package.json
+│   └── vite.config.js
+│
+├── backend/
+│   ├── app/
+│   │   ├── main.py
+│   │   ├── routes/
+│   │   │   ├── documents.py
+│   │   │   ├── chat.py
+│   │   │   ├── quiz.py
+│   │   │   └── progress.py
+│   │   ├── services/
+│   │   │   ├── pdf_processor.py
+│   │   │   ├── rag.py
+│   │   │   ├── ai.py
+│   │   │   ├── topic_engine.py
+│   │   │   └── mastery_engine.py
+│   │   ├── models/
+│   │   │   └── database.py
+│   │   └── config.py
+│   ├── requirements.txt
+│   └── .env.example
+│
+├── data/
+│   └── uploads/
+│
+├── tests/
+│
+├── README.md
+├── .gitignore
+└── LICENSE
+
+You may adjust the exact structure if needed for reliability, but maintain clean separation between frontend, backend, AI services, database, and utilities.
+
+==================================================
+35. README
+==================================================
+
+Create a professional README.
+
+Include:
+
+Project name
+
+Problem
+
+Solution
+
+Why ClassBridge is different
+
+Features
+
+Architecture
+
+Tech stack
+
+RAG pipeline
+
+Database structure
+
+Setup instructions
+
+Environment variables
+
+How to run locally
+
+Demo mode
+
+AI architecture
+
+Future improvements
+
+Screenshots section placeholder
+
+Hackathon presentation section
+
+Do not claim features that are not actually implemented.
+
+==================================================
+36. TESTING
+==================================================
+
+Create tests for important backend functionality.
+
+Test:
+
+Health endpoint
+
+Database initialization
+
+PDF processing
+
+Topic processing
+
+Quiz scoring
+
+Mastery calculation
+
+Recommendation logic
+
+API validation
+
+The application must be tested before finalizing.
+
+==================================================
+37. SELF-DEBUGGING REQUIREMENT
+==================================================
+
+THIS IS CRITICAL.
+
+After generating the project:
+
+1. Install dependencies.
+
+2. Start the backend.
+
+3. Start the frontend.
+
+4. Check for build errors.
+
+5. Check for import errors.
+
+6. Check for missing packages.
+
+7. Check API communication.
+
+8. Check database initialization.
+
+9. Check routing.
+
+10. Check dark/light mode.
+
+11. Check responsive layout.
+
+12. Check demo mode.
+
+13. Check PDF upload flow.
+
+14. Check quiz flow.
+
+15. Check mastery calculation.
+
+16. Check AI fallback behavior.
+
+17. Fix any errors you find.
+
+Do NOT stop after creating files.
+
+Actually run the application and verify it.
+
+If an error occurs:
+
+Diagnose it.
+
+Fix it.
+
+Run again.
+
+Repeat until the application builds and runs successfully.
+
+Do not leave known errors unresolved.
+
+==================================================
+38. PERFORMANCE
+==================================================
+
+Keep the application lightweight.
+
+Avoid unnecessary dependencies.
+
+Avoid huge libraries when a small implementation works.
+
+Avoid unnecessary animations that cause lag.
+
+Use lazy loading where useful.
+
+Do not make the frontend depend on external image assets for the butterfly animation.
+
+==================================================
+39. HACKATHON PRESENTATION QUALITY
+==================================================
+
+The finished app should be demo-friendly.
+
+A judge should be able to understand the product quickly.
+
+The strongest demo sequence should be:
+
+1. Open ClassBridge.
+
+2. Show dashboard.
+
+3. Upload/choose DBMS course.
+
+4. Show detected concepts.
+
+5. Take diagnostic.
+
+6. Show weak topic:
+   Functional Dependencies — 40%
+
+7. Open AI Teacher.
+
+8. Ask:
+   “Explain functional dependencies simply.”
+
+9. Show material-grounded answer.
+
+10. Generate practice.
+
+11. Answer questions.
+
+12. Show improvement.
+
+13. Show:
+   40% → 82%
+
+14. Open Mastery Dashboard.
+
+15. Show personalized recommendation.
+
+This should visually communicate:
+
+“ClassBridge doesn't just answer questions.
+It measures learning and helps students improve.”
+
+==================================================
+40. IMPORTANT UX RULES
+==================================================
+
+No dead buttons.
+
+No fake navigation.
+
+No placeholder text such as:
+
+“Lorem ipsum”
+
+“No content”
+
+“Coming soon”
+
+unless it is clearly marked as a future feature.
+
+Every major button should perform an action.
+
+Use realistic data.
+
+Use meaningful error messages.
+
+Use accessible labels.
+
+Use good contrast.
+
+Use readable typography.
+
+Do not overcrowd screens.
+
+==================================================
+41. DO NOT BUILD THESE FEATURES
+==================================================
+
+Do NOT add:
+
+Teacher dashboard.
+
+Social media.
+
+Payments.
+
+Subscription system.
+
+Mobile native app.
+
+Voice assistant.
+
+Complex multi-role authentication.
+
+Unnecessary gamification.
+
+Excessive animations.
+
+Unnecessary microservices.
+
+Overcomplicated cloud infrastructure.
+
+Do not expand the scope beyond the defined MVP.
+
+The teacher dashboard can be mentioned as a future roadmap item only.
+
+==================================================
+42. FUTURE ROADMAP
+==================================================
+
+In README only, mention possible future features:
+
+Teacher dashboard
+
+Class analytics
+
+Assignment generation
+
+Spaced repetition
+
+Voice learning
+
+Mobile application
+
+Advanced analytics
+
+Collaborative learning
+
+Do not implement these now.
+
+==================================================
+43. DESIGN DETAILS
+==================================================
+
+Use a polished typography hierarchy.
+
+Large elegant headings.
+
+Rounded but not overly rounded cards.
+
+Subtle borders.
+
+Soft shadows.
+
+Purple accent buttons.
+
+Smooth hover states.
+
+Smooth page transitions.
+
+Progress bars should animate gently.
+
+Quiz selection should have clear selected states.
+
+Correct/incorrect states should be visually obvious.
+
+Use icons where appropriate.
+
+Avoid excessive emoji inside the application.
+
+==================================================
+44. ACCESSIBILITY
+==================================================
+
+Use semantic HTML.
+
+Buttons must have accessible labels.
+
+Inputs must have labels.
+
+Keyboard navigation should work.
+
+Ensure sufficient contrast.
+
+Do not rely only on color to communicate quiz correctness.
+
+==================================================
+45. FINAL ACCEPTANCE CRITERIA
+==================================================
+
+The project is considered complete only if:
+
+✓ Frontend builds successfully.
+
+✓ Backend starts successfully.
+
+✓ Database initializes successfully.
+
+✓ Navigation works.
+
+✓ Demo mode works.
+
+✓ Dashboard works.
+
+✓ Upload screen works.
+
+✓ PDF processing works.
+
+✓ Topics can be displayed.
+
+✓ Diagnostic test works.
+
+✓ Quiz scoring works.
+
+✓ AI Teacher works with API key.
+
+✓ AI Teacher fallback works without API key.
+
+✓ RAG architecture is implemented.
+
+✓ Practice works.
+
+✓ Mastery calculation works.
+
+✓ Weak-topic detection works.
+
+✓ Revision recommendations work.
+
+✓ Results screen works.
+
+✓ Before/after improvement is displayed.
+
+✓ Dark mode works.
+
+✓ Light mode works.
+
+✓ Theme persists.
+
+✓ Butterfly animations work.
+
+✓ Responsive design works.
+
+✓ Error handling works.
+
+✓ Loading states work.
+
+✓ README exists.
+
+✓ No hardcoded API secrets.
+
+✓ No known build/runtime errors remain.
+
+==================================================
+46. IMPORTANT FINAL INSTRUCTION
+==================================================
+
+DO NOT just tell me how to build this.
+
+BUILD IT.
+
+Do not ask me unnecessary clarification questions.
+
+Make sensible engineering decisions when something is unspecified.
+
+Prioritize reliability over unnecessary complexity.
+
+If a dependency causes problems, replace it with a simpler reliable alternative.
+
+If an external AI API is unavailable, use Demo Mode rather than breaking the application.
+
+If something fails during development, debug and fix it.
+
+After implementation, run the project and verify it.
+
+The final result should be a polished, working ClassBridge MVP suitable for a student AI/education hackathon demonstration.
+
+The application must communicate one clear idea:
+
+CLASSBRIDGE
+“Don't just study more. Know what you need to learn next.”

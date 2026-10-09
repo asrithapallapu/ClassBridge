@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "ClassBridge"
+description = "An AI learning companion that turns course materials into a personalized path: diagnose knowledge, learn with grounded tutoring, practice weak topics, and track mastery."
+version = "1.0.0"
+id = "artifacts/classbridge"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25974
+
+[services.development]
+run = "pnpm --filter @workspace/classbridge run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/classbridge", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/classbridge/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25974"
+BASE_PATH = "/"
